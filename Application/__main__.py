@@ -2,4 +2,4 @@ import numpy as np
 
 import tensorflow as tf
 
-pass
+appliancesData = open("../Data/Appliances_5.json", 'r')
