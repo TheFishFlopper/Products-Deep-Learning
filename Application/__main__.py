@@ -6,8 +6,9 @@ from json import loads
 
 print("Running")
 
-appliancesData = open("Data/Appliances_5.json", 'r')
-dataTable = [loads(line) for line in appliancesData]
+appliancesData = open("Data/Appliances_5.json", 'r')  # Opens data file.
+dataTable = [loads(line) for line in appliancesData]  # Converts each line of data into a dictionary.
 
+# Prints each dictionary.
 for line in dataTable:
     print(line)
