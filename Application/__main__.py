@@ -7,7 +7,6 @@ from json import loads
 
 maxRating = 5
 batchSize = 512
-shuffleSize = 10
 
 print("Running")
 
