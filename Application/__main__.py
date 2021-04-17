@@ -50,5 +50,6 @@ history = model.fit(trainData.shuffle(round(length*0.3)).batch(batchSize),
 
 results = model.evaluate(testData.batch(batchSize), verbose=2)
 
+print("Results:")
 for name, value in zip(model.metrics_names, results):
     print("%s: %.3f" % (name, value))
