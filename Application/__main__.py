@@ -7,6 +7,7 @@ from json import loads
 
 maxRating = 5
 batchSize = 512
+highestRating = 5.0
 
 print("Running")
 
@@ -18,7 +19,7 @@ reviews = list()
 ratings = list()
 for review in dataTable:
     reviews.append(review["reviewText"])
-    ratings.append(float(review["overall"])/5.0)
+    ratings.append(float(review["overall"])/highestRating)
 
 # Split lists.
 length = len(reviews)
