@@ -1,14 +1,26 @@
 from tkinter import *
 from tkinter import scrolledtext, font, ttk
+import glob
 import random
 
 
 # Button command
 def buttonCommand():
     textInput = reviewInput.get('1.0', 'end-1c')
-    print(textInput)
+    selectedFile = "../Models/" + dropdown.get()
+    print(selectedFile, textInput)
     starNum = random.randint(1, 5)
     stars.config(text='★' * starNum)
+
+
+# Dropdown update
+def dropdownUpdate(*args):
+    dirtyOptions = glob.glob('..\Models\*.txt')
+    cleanOptions = []
+    for file in dirtyOptions:
+        cleanOptions.append(file.lstrip('..\Models\\'))
+    dropdown['values'] = cleanOptions
+
 
 # Create window
 root = Tk()
@@ -27,11 +39,6 @@ buttonFont = font.Font(family="Lucida Console", size=12)
 frame = Frame(root, bd=0, bg='white')
 frame.place(relx=0, rely=0, relheight=1, relwidth=1)
 
-options = ['1', '2', '3']
-dropdown = ttk.Combobox(frame, values=options)
-dropdown.current(0)
-dropdown.place(relx=1, rely=0, width=200, x=-200)
-
 title = Label(frame, text='Review Rating Suggester', font=titleFont, bg='white')
 title.place(relx=0.5, rely=0.125, width=500, y=-18, x=-250)
 
@@ -42,8 +49,18 @@ reviewInput = scrolledtext.ScrolledText(frame, undo=True, padx=10, pady=10, bd=3
 reviewInput.configure(font=textFont)
 reviewInput.place(relx=0.25, rely=0.25, relheight=0.5, relwidth=0.5)
 
-goButton = Button(frame, text='Go', font=buttonFont, command=buttonCommand)
-goButton.place(relx=0.5, rely=0.75, width=200, y=10, x=-100, height=25)
+buttonsFrame = Frame(root, bd=0, bg='white')
+buttonsFrame.place(relx=0.25, rely=0.75, relwidth=0.5, y=10, height=25)
+
+goButton = Button(buttonsFrame, text='Go', font=buttonFont, relief=GROOVE, command=buttonCommand)
+goButton.place(relx=0, rely=0, relwidth=0.3, height=25)
+
+options = []
+dropdown = ttk.Combobox(buttonsFrame, values=options, state="readonly", postcommand=dropdownUpdate)
+dropdownUpdate()
+dropdown.current(0)
+dropdown.bind("<<ComboboxSelected>>", dropdownUpdate)
+dropdown.place(relx=0.7, rely=0, relwidth=0.3, height=25)
 
 stars = Label(frame, text='', font=('bold', 30), fg='#FFA41D', bg='white')
 stars.place(relx=0.5, rely=0.875, width=200, y=-15, x=-100)
