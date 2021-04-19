@@ -47,5 +47,11 @@ fabric.properties
 [Ss]cripts
 pyvenv.cfg
 .venv
+.venvzip
+.Models
+.Models/test
 pip-selfcheck.json
-
+Models/test/assets/tokens.txt
+Models/test/saved_model.pb
+Models/test/variables/variables.index
+Models/test/variables/variables.data-00000-of-00001
