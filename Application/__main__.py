@@ -7,7 +7,7 @@ from json import loads
 
 maxRating = 5
 batchSize = 512
-shuffleSize = 10
+highestRating = 5.0
 
 print("Running")
 
@@ -19,7 +19,7 @@ reviews = list()
 ratings = list()
 for review in dataTable:
     reviews.append(review["reviewText"])
-    ratings.append(float(review["overall"])/5.0)
+    ratings.append(float(review["overall"])/highestRating)
 
 # Split lists.
 length = len(reviews)
@@ -56,5 +56,6 @@ history = model.fit(trainData.shuffle(round(length*0.3)).batch(batchSize),
 results = model.evaluate(testData.batch(batchSize), verbose=2)
 
 # Shows results of evaluation.
+print("Results:")
 for name, value in zip(model.metrics_names, results):
     print("%s: %.3f" % (name, value))
