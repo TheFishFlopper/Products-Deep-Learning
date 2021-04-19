@@ -31,26 +31,31 @@ trainData = tf.data.Dataset.from_tensor_slices((trainReviews, trainRatings))
 validationData = tf.data.Dataset.from_tensor_slices((validationReviews, validationRatings))
 testData = tf.data.Dataset.from_tensor_slices((testReviews, testRatings))
 
-
+# Makes first layer. Used to convert text into numbers.
 embedding = "https://tfhub.dev/google/nnlm-en-dim50/2"
 hubLayer = hub.KerasLayer(embedding, input_shape=[], dtype=tf.string, trainable=True)
 
+# Creates model with 2 layers.
 model = tf.keras.Sequential()
 model.add(hubLayer)
 model.add(tf.keras.layers.Dense(16, activation='relu'))
 model.add(tf.keras.layers.Dense(1))
 
-model.summary()
+model.summary() # Shows summary of the model.
 
+# Compiles model using logit, an optimizer and a chosen metric.
 model.compile(optimizer='adam', loss=tf.keras.losses.BinaryCrossentropy(from_logits=True), metrics=['accuracy'])
 
+# Fits the model to the data.
 history = model.fit(trainData.shuffle(round(length*0.3)).batch(batchSize),
                     epochs=10,
                     validation_data=validationData.batch(batchSize),
                     verbose=1)
 
+# Evaluates the model's accuracy and loss.
 results = model.evaluate(testData.batch(batchSize), verbose=2)
 
+# Shows results of evaluation.
 print("Results:")
 for name, value in zip(model.metrics_names, results):
     print("%s: %.3f" % (name, value))
