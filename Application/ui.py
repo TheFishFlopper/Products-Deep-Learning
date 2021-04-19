@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import scrolledtext, font
+from tkinter import scrolledtext, font, ttk
 import random
 
 
@@ -27,10 +27,15 @@ buttonFont = font.Font(family="Lucida Console", size=12)
 frame = Frame(root, bd=0, bg='white')
 frame.place(relx=0, rely=0, relheight=1, relwidth=1)
 
+options = ['1', '2', '3']
+dropdown = ttk.Combobox(frame, values=options)
+dropdown.current(0)
+dropdown.place(relx=1, rely=0, width=200, x=-200)
+
 title = Label(frame, text='Review Rating Suggester', font=titleFont, bg='white')
 title.place(relx=0.5, rely=0.125, width=500, y=-18, x=-250)
 
-instructions = Label(frame, text='Write a review and we\'ll suggest a rating:', font=instructionsFont, bg='white')
+instructions = Label(frame, text='Write a review and we\'ll suggest its rating:', font=instructionsFont, bg='white')
 instructions.place(relx=0.5, rely=0.25, width=500, y=-30, x=-250)
 
 reviewInput = scrolledtext.ScrolledText(frame, undo=True, padx=10, pady=10, bd=3, relief=GROOVE)
