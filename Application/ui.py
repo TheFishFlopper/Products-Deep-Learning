@@ -16,10 +16,13 @@ def buttonCommand():
 # Dropdown update
 def dropdownUpdate(*args):
     dirtyOptions = glob.glob('..\Models\*\\')
-    cleanOptions = []
-    for file in dirtyOptions:
-        cleanOptions.append(file.lstrip('..\Models\\').rstrip('\\'))
-    dropdown['values'] = cleanOptions
+    if dirtyOptions:
+        cleanOptions = []
+        for file in dirtyOptions:
+            cleanOptions.append(file.lstrip('..\Models\\').rstrip('\\'))
+        dropdown['values'] = cleanOptions
+    else:
+        dropdown['values'] = ['']
 
 
 # Create window
@@ -55,7 +58,7 @@ buttonsFrame.place(relx=0.25, rely=0.75, relwidth=0.5, y=10, height=25)
 goButton = Button(buttonsFrame, text='Go', font=buttonFont, relief=GROOVE, command=buttonCommand)
 goButton.place(relx=0, rely=0, relwidth=0.3, height=25)
 
-options = []
+options = ['']
 dropdown = ttk.Combobox(buttonsFrame, values=options, state="readonly", postcommand=dropdownUpdate)
 dropdownUpdate()
 dropdown.current(0)
