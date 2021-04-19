@@ -15,10 +15,10 @@ def buttonCommand():
 
 # Dropdown update
 def dropdownUpdate(*args):
-    dirtyOptions = glob.glob('..\Models\*.txt')
+    dirtyOptions = glob.glob('..\Models\*\\')
     cleanOptions = []
     for file in dirtyOptions:
-        cleanOptions.append(file.lstrip('..\Models\\'))
+        cleanOptions.append(file.lstrip('..\Models\\').rstrip('\\'))
     dropdown['values'] = cleanOptions
 
 
