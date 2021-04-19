@@ -38,14 +38,14 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # Virtualenv
-#.Python
-#[Bb]in
-#[Ii]nclude
-#[Ll]ib
-#[Ll]ib64
-#[Ll]ocal
-#[Ss]cripts
-#pyvenv.cfg
-#.venv
-#pip-selfcheck.json
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
 
