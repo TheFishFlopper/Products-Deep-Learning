@@ -29,7 +29,7 @@ output = input("Name of file to save model as in Models folder (No extension): "
 
 print("Running..........")
 
-appliancesData = open("Data/{}".format(data), 'r')  # Opens data file.
+appliancesData = open("../Data/{}".format(data), 'r')  # Opens data file.
 dataTable = [loads(line) for line in appliancesData]  # Converts each line of data into a dictionary.
 
 # Makes list of tuples with the reviews tied to their ratings.
@@ -56,13 +56,13 @@ hubLayer = hub.KerasLayer(embedding, input_shape=[], dtype=tf.string, trainable=
 # Creates model with 2 layers.
 model = tf.keras.Sequential()
 model.add(hubLayer)
-model.add(tf.keras.layers.Dense(16, activation='relu'))
+model.add(tf.keras.layers.Dense(16, activation='sigmoid'))
 model.add(tf.keras.layers.Dense(1))
 
 model.summary() # Shows summary of the model.
 
 # Compiles model using logit, an optimizer and a chosen metric.
-model.compile(optimizer='adam', loss=tf.keras.losses.BinaryCrossentropy(from_logits=True), metrics=['accuracy'])
+model.compile(optimizer='adam', loss=tf.keras.losses.MeanSquaredError(), metrics = ['accuracy'])
 
 # Fits the model to the data.
 history = model.fit(trainData.shuffle(round(length*0.3)).batch(batchSize),
